@@ -9,7 +9,16 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.21.0",
+    "bcrypt": "^5.0.0",
+    "bootstrap": "^4.5.3",
+    "bootstrap-vue": "^2.19.0",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
-    "mysql2": "^2.2.5"
+    "jsonwebtoken": "^8.5.1",
+    "mysql2": "^2.2.5",
+    "package.json": "^2.0.1",
+    "vue": "^2.6.12",
+    "vuelidate": "^0.7.6"
   }
 }
