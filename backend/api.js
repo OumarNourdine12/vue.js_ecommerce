@@ -8,7 +8,7 @@ const routes = require('./route')
 
 // })
 
-app.use('/', routes)
+app.use(routes)
 
 
 

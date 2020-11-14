@@ -1,5 +1,7 @@
 <template>
   <div>
+    
+
     <b-form @submit="onSubmit" @reset="onReset" >
       <b-form-group id="input-group-1" label="Votre Nom:" label-for="input-1">
         <b-form-input
@@ -21,23 +23,23 @@
 
       <b-form-group
         id="input-group-2"
-        label="Votre Prénom:"
+        label="Votre Prenom:"
         label-for="input-2"
       >
         <b-form-input
-          :class="{ borderError: $v.form.prénom.$error }"
-          @input="$v.form.prénom.$touch()"
+          :class="{ borderError: $v.form.prenom.$error }"
+          @input="$v.form.prenom.$touch()"
           id="input-2"
-          v-model="form.prénom"
+          v-model="form.prenom"
           required
           placeholder="Entez Prénom"
         ></b-form-input>
-        <div class="error" v-if="!$v.form.prénom.required">
+        <div class="error" v-if="!$v.form.prenom.required">
          
         </div>
-        <div class="error" v-if="!$v.form.prénom.minLength">
+        <div class="error" v-if="!$v.form.prenom.minLength">
           Name must have at least
-          {{ $v.form.prénom.$params.minLength.min }} letters.
+          {{ $v.form.prenom.$params.minLength.min }} letters.
         </div>
       </b-form-group>
 
@@ -104,7 +106,7 @@ export default {
     return {
       form: {
            nom: "",
-           prénom: "",
+           prenom: "",
         email: "",
         password: "",
         submitStatus: null,
@@ -118,7 +120,7 @@ export default {
         required,
         minLength: minLength(4)
       },
-      prénom: {
+      prenom: {
         required,
         minLength: minLength(4),
       },
@@ -143,7 +145,7 @@ export default {
         axios
           .post("http://localhost:3000/SingUp", {
             nom: this.form.nom,
-            prénom: this.form.prénom,
+            prenom: this.form.prenom,
             email: this.form.email,
             password: this.form.password,
           })
