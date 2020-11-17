@@ -38,19 +38,28 @@ app.post('/SingUp', function (req, res) {
 });
 
 app.post('/SignIn', function (req, res) {
-  console.log('Bonjour')
-
-  var sql = `SELECT * FROM users where email = "${req.body.email}"`
-  db.query(sql, function (err, result){
-    console.log(result)
-    if (err) console.log(err)
-
-    bcrypt.compare(req.body.password, result[0].password, function (err, response){
-      console.log(response)
-
-    })
+  // requete
+  
+  var sql = `SELECT * FROM users where email ="${req.body.email}"`
+  db.query(sql, function (err, result) {
+      console.log(result)
+      if (err) console.log(err)
+      // compare les password ::: (envoie un msg n'existe pas la condition)
+      if (result.length) {
+      bcrypt.compare(req.body.password, result[0].password, function (err, response) {
+          // genere le token
+          var token = jwt.sign({ id: result[0].id, nom: result[0].nom }, 'aj_kneun34890shyéééççunhs8891111');
+          if (response) {
+              res.send(token)
+          }
+          else {
+              res.status(500).send("Mot de pass incorrect")
+          }
+      });
+    } else {
+      res.status(500).send("Email n'existe pas")
+    }
   })
-
-})
+});
 
 module.exports = app; 

@@ -1,9 +1,10 @@
 <template>
   <div>
-    
 
-    <b-form @submit="onSubmit" @reset="onReset" >
-      <b-form-group id="input-group-1" label="Votre Nom:" label-for="input-1">
+
+    <b-form class="form"  @submit="onSubmit" @reset="onReset" >
+      <b-form-group id="input-group-1" 
+      label="Votre Nom">
         <b-form-input
           :class="{ borderError: $v.form.nom.$error }"
           @input="$v.form.nom.$touch()"
@@ -15,15 +16,20 @@
         ></b-form-input>
       </b-form-group>
 
-      <div class="error" v-if="!$v.form.nom.required"></div>
-      <div class="error" v-if="!$v.form.nom.minLength">
-        Name must have at least
-        {{ $v.form.nom.$params.minLength.min }} letters.
+      <div v-if="$v.form.nom.dirty">
+      <p class="error" v-if="!$v.form.nom.required">
+        Name must have at least </p>
+        <p class="error" v-if="!$v.form.nom.minLength"> Last Name is required.
+           {{ $v.nom.$params.minLength.min}} letters</p>
+           <p class="error"
+           v-if="!$v.from.nom.maxLength"> You should have amaximum of 
+           {{ $v.nom.$params.maxLength.max}} letters</p>
+      
       </div>
 
       <b-form-group
         id="input-group-2"
-        label="Votre Prenom:"
+        label="Votre Prenom"
         label-for="input-2"
       >
         <b-form-input
@@ -45,7 +51,7 @@
 
       <b-form-group
         id="input-group-3"
-        label="Votre Adresse Email:"
+        label="Votre Adresse Email"
         label-for="input-3"
       >
         <b-form-input
@@ -67,25 +73,20 @@
         </div>
       </b-form-group>
 
-      <b-form-group
-        id="input-group-4"
-        label="Your Password:"
-        label-for="input-4"
-      >
+       <b-form-group id="input-group-3" label="Password:" label-for="input-3">
         <b-form-input
-          :class="{ borderError: $v.form.password.$error }"
-          @input="$v.form.password.$touch()"
-          id="input-2"
-          v-model="form.password"
+        :class="{ error: $v.form.password.$error }"
+          id="input-3"
+          type="password"
+          v-model.trim="form.password"
           required
-          placeholder="Enter password"
+          placeholder="Enter your secret password"
+          @input="$v.form.password.$touch()"
         ></b-form-input>
-        <div class="error" v-if="!$v.form.password.required">
-        
-        </div>
-        <div class="error" v-if="!$v.form.password.minLength">
-          Name must have at least
-          {{ $v.form.password.$params.minLength.min }} letters.
+        <div v-if="$v.form.password.$dirty">
+          <p class="err_mess" v-if="!$v.form.password.required">
+            Password must be fill
+          </p>
         </div>
       </b-form-group>
 
@@ -99,7 +100,7 @@
 
 
 <script>
-import { required, minLength } from "vuelidate/lib/validators";
+import { required, maxLength, minLength, email  } from "vuelidate/lib/validators";
 const axios = require("axios");
 export default {
   data() {
@@ -109,22 +110,30 @@ export default {
            prenom: "",
         email: "",
         password: "",
-        submitStatus: null,
+        minLength: "",
+        maxLength: "",
+
+        // submitStatus: null,
       },
       show: true,
+      
+      
     };
   },
   validations: {
     form: {
       nom: {
         required,
-        minLength: minLength(4)
+        minLength: minLength(4),
+        
       },
       prenom: {
         required,
         minLength: minLength(4),
+        maxLength
       },
       email: {
+        email,
         required,
         minLength: minLength(4),
       },
@@ -151,15 +160,19 @@ export default {
           })
           .then((response) => {
             console.log(response);
+            console.log("mama")
+            
           })
           .catch((err) => {
             console.log(err);
+            
           });
       }
       
     }, 
   
   },
+  
 
 };
 </script>
@@ -167,7 +180,26 @@ export default {
 
 
 <style scoped>
-.borderError {
-  border-color: red;
+
+/* .error {
+  color: red;
+  border: 1px solid red;
+} */
+.form {
+  display: inline-block;
+  text-align: center;
+  width: 49%;
+}
+.validators {
+  display: inline-block;
+  width: 49%;
+  text-align: center;
+  vertical-align: top;
+}
+.input {
+  padding: 5px;
+}
+input:focus {
+  outline: none;
 }
 </style>
