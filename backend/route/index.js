@@ -48,7 +48,7 @@ app.post('/SignIn', function (req, res) {
       if (result.length) {
       bcrypt.compare(req.body.password, result[0].password, function (err, response) {
           // genere le token
-          var token = jwt.sign({ id: result[0].id, nom: result[0].nom }, 'aj_kneun34890shyéééççunhs8891111');
+          var token = jwt.sign({ id: result[0].id, nom: result[0].nom, is_admin: result[0].is_admin}, 'aj_kneun34890shyéééççunhs8891111');
           if (response) {
               res.send(token)
           }
@@ -61,5 +61,7 @@ app.post('/SignIn', function (req, res) {
     }
   })
 });
+
+
 
 module.exports = app; 

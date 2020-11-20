@@ -1,4 +1,5 @@
 <template>
+
   <div>
     <b-form @submit="onSubmit" @reset="onReset">
       <b-form-group id="input-group-2" label="Email address:" label-for="input-2">
@@ -21,7 +22,8 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from 'axios';
+import jwt from 'jsonwebtoken'
 
 export default {
   name: "SignIn",
@@ -44,9 +46,20 @@ export default {
       console.log(response.data)
             
           // alert(JSON.stringify(this.form))
-          this.$router.push('/')
-                
+          // this.$router.push('/')
+
+          // décodé le token et poser la condition admin.
+             var decode = jwt.decode(response.data)
+             console.log(decode.is_admin) 
+             if(decode.is_admin == 1) {
+               this.$router.push('/Admin')
+             } else { 
+               this.$router.push('/Product')
+             }
+              
         })
+        
+
         .catch(function (error) {
           console.log(error.response.data);
         });

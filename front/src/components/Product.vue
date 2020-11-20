@@ -24,10 +24,10 @@ export default {
         return{
             products: [
                 {
-          title: 'Nike Mercurial',
+           title: ' Veste PSG Jordan Fleece 20/21',
           color: 'green',
-          description: 'Nike Mercurial Superfly 7 Academy MG intègre une plaque polyvalente multi-surfaces qui offre une excellente adhérence sur surfaces naturelles et synthétiques.',
-          src: 'https://images.sportsdirect.com/images/products/19101501_l.jpg',
+          description: 'Restez au chaud dans les gradins cet hiver. Également idéal à porter en ville, ce polaire est un indispensable pour tous les supporters..',
+          src: 'https://store.psg.fr/content/ws/176706/b_spot_jumpers_fre.jpg',
         },
         {
           title: 'Nike Air Max',

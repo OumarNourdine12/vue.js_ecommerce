@@ -4,6 +4,7 @@ import SingUp from '../components/SingUp.vue'
 import SignIn from '../components/SignIn'
 import Product from '../components/Product'
 import Home from '../views/Home'
+import Admin from  '../components/Admin'
 
 
 
@@ -14,16 +15,20 @@ Vue.use(VueRouter)
 
 
 const routes = [
+
+
+  {
+    path: '/',
+    name: 'Home',
+    component: Home
+  },
+  
     {
         path: '/SingUp',
         name: 'SingUp',
         component: SingUp
     },
-    {
-      path: '/',
-      name: 'Home',
-      component: Home
-    },
+    
     {
       path:'/Product',
       name: '/Product',
@@ -33,6 +38,11 @@ const routes = [
       path:'/SignIn',
       name: '/SignIn',
       component: SignIn
+    },
+    {
+      path:'/Admin',
+      name: '/Admin',
+      component: Admin
     },
 
     {

@@ -1,5 +1,7 @@
 <template>
   <div>
+    
+   
     <b-Carousel
       id="Carousel-1"
       v-model="slide"
@@ -42,12 +44,19 @@
         </template>
       </b-Carousel-slide>
     </b-Carousel>
+ <HelloWorld/>
+    
   </div>
 </template>
 
 
 <script>
+import HelloWorld from './HelloWorld';
+
 export default {
+  components: {
+    HelloWorld
+  },
     data(){
         return{
             slide: 0,
